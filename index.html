@@ -6,7 +6,6 @@
     <title>DDConejaton 2026</title>
     <link rel="icon" type="image/png" href="logo.png">
     <style>
-        /* 1. PAISAJE DE FONDO ECO 2.0 */
         body {
             background-image: url('https://i.pinimg.com/736x/a5/47/91/a54791b2f500a6454fd17f8ab8d88adc.jpg');
             background-size: cover;
@@ -24,7 +23,6 @@
             position: relative;
         }
 
-        /* 2. DECORACIONES DEL PAISAJE */
         .decoracion-fondo {
             position: absolute;
             z-index: 1;
@@ -38,7 +36,6 @@
             50% { transform: translateY(-20px) rotate(2deg); }
         }
 
-        /* 3. EL TELEVISOR */
         .contenedor-tv {
             position: relative;
             width: 620px;  
@@ -57,7 +54,6 @@
             filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
         }
 
-        /* 4. LA PANTALLA */
         .pantalla {
             position: absolute;
             top: 10.5%;    
@@ -77,9 +73,8 @@
             transition: opacity 0.2s ease;
         }
 
-        /* 5. CONTROLES - BOTONES HUEVO */
         .controles-globales {
-            margin-top: -20px; /* Al poner un número negativo, los huevos "suben" */
+            margin-top: -20px;
             z-index: 40;
             display: flex;
             gap: 40px; 
@@ -91,7 +86,7 @@
             position: relative;
             padding: 0;
             transition: transform 0.2s ease;
-            width: 100px; /* Tamaño del huevo */
+            width: 100px;
             height: 130px;
             display: flex;
             flex-direction: column;
@@ -125,7 +120,6 @@
             transform: scale(0.9);
         }
 
-        /* OREJAS */
         .orejas-tv {
             position: absolute;
             top: -150px;
@@ -176,7 +170,6 @@
     </div>
 
     <script>
-        // LÓGICA DE CANALES
         const imagenesPascua = [
             "DCCosas pascua.png",
             "DCCosas glich.png",
@@ -199,7 +192,6 @@
             }, 150);
         }
 
-        // LÓGICA DE MÚSICA
         function toggleMusica() {
             const txtMusica = document.getElementById('txtMusica');
             if (musica.paused) {
