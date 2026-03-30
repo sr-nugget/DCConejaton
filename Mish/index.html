@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pascua TV - Versión Final Pro</title>
+    <style>
+        /* 1. PAISAJE DE FONDO ECO 2.0 */
+        body {
+            background-image: url('https://i.pinimg.com/736x/a5/47/91/a54791b2f500a6454fd17f8ab8d88adc.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 2. DECORACIONES DEL PAISAJE */
+        .decoracion-fondo {
+            position: absolute;
+            z-index: 1;
+            pointer-events: none;
+            animation: flotarFondo 4s ease-in-out infinite;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+        }
+
+        @keyframes flotarFondo {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        /* 3. EL TELEVISOR */
+        .contenedor-tv {
+            position: relative;
+            width: 620px;  
+            height: 450px;
+            z-index: 10;
+        }
+
+        .marco-tv {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            pointer-events: none;
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
+        }
+
+        /* 4. LA PANTALLA */
+        .pantalla {
+            position: absolute;
+            top: 10.5%;    
+            left: 9.5%;    
+            width: 65%;    
+            height: 56.5%; 
+            background-color: black;
+            z-index: 5;
+            overflow: hidden;
+            border-radius: 30px / 60px;
+        }
+        
+        .pantalla img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.2s ease;
+        }
+
+        /* 5. CONTROLES - BOTONES HUEVO */
+        .controles-globales {
+            margin-top: -20px; /* Al poner un número negativo, los huevos "suben" */
+            z-index: 40;
+            display: flex;
+            gap: 40px; 
+        }
+        .boton-huevo {
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            padding: 0;
+            transition: transform 0.2s ease;
+            width: 100px; /* Tamaño del huevo */
+            height: 130px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .boton-huevo img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+        }
+
+        .boton-huevo span {
+            position: absolute;
+            bottom: -25px;
+            color: white;
+            font-size: 14px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            white-space: nowrap;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        .boton-huevo:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .boton-huevo:active {
+            transform: scale(0.9);
+        }
+
+        /* OREJAS */
+        .orejas-tv {
+            position: absolute;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;   
+            z-index: 1; 
+            pointer-events: none;
+            animation: moverOrejas 5s ease-in-out infinite;
+            transform-origin: bottom center;
+        }
+
+        @keyframes moverOrejas {
+            0%, 100% { transform: translateX(-50%) rotate(-3deg); }
+            50% { transform: translateX(-50%) rotate(3deg) scaleY(1.08); }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="miMusica" loop>
+        <source src="Meowl - New Soul [FULL MUSIC] Yael Naim.mp3" type="audio/mpeg">
+    </audio>
+
+    <img src="Big DCChungus.png" class="decoracion-fondo" style="top: 15%; left: 10%; width: 180px;">
+    <img src="DCCinejo.png" class="decoracion-fondo" style="bottom: 10%; right: 10%; width: 180px; animation-delay: 1s;">
+
+    <div class="contenedor-tv">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/057/172/173/small/fluffy-rabbit-ears-perfect-for-easter-celebrations-decorated-on-a-bright-transparent-background-fluffy-easter-bunny-ears-on-transparent-background-free-png.png" class="orejas-tv">
+        
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/034/374/012/small/vintage-television-with-cut-out-screen-on-isolated-ai-generative-free-png.png" class="marco-tv">
+        
+        <div class="pantalla">
+            <img src="DCCosas pascua.png" id="imgCanal">
+        </div>
+    </div>
+
+    <div class="controles-globales">
+        <button class="boton-huevo" onclick="cambiar()">
+            <img src="https://cdn-icons-png.flaticon.com/512/347/347435.png" alt="Canal">
+            <span>Siguiente Canal</span>
+        </button>
+
+        <button class="boton-huevo" onclick="toggleMusica()">
+            <img id="huevoMusica" src="https://images.vexels.com/media/users/3/162120/isolated/preview/c85115745d0274227f0b4832a3f3f4d5-huevo-de-pascua-pintado-huevo-de-pascua-huevo-de-pascua-patron-punto-plano.png" alt="Música">
+            <span id="txtMusica">Play Música</span>
+        </button>
+    </div>
+
+    <script>
+        // LÓGICA DE CANALES
+        const imagenesPascua = [
+            "DCCosas pascua.png",
+            "DCCosas glich.png",
+            "DCCategoria.png",
+            "DCCfechas.png",
+            "DCCregla.png",
+            
+        ];
+
+        let indice = 0;
+        const pantallaImg = document.getElementById('imgCanal');
+        const musica = document.getElementById('miMusica');
+
+        function cambiar() {
+            pantallaImg.style.opacity = 0;
+            setTimeout(() => {
+                indice = (indice + 1) % imagenesPascua.length;
+                pantallaImg.src = imagenesPascua[indice];
+                pantallaImg.style.opacity = 1;
+            }, 150);
+        }
+
+        // LÓGICA DE MÚSICA
+        function toggleMusica() {
+            const txtMusica = document.getElementById('txtMusica');
+            if (musica.paused) {
+                musica.play().catch(e => console.log("Error de audio:", e));
+                txtMusica.innerText = "Pausar Música";
+            } else {
+                musica.pause();
+                txtMusica.innerText = "Play Música";
+            }
+        }
+    </script>
+</body>
+</html>
